@@ -6,8 +6,8 @@ public class ShipController : MonoBehaviour
     float rotationSpeed = 100.0f;
     float thrustForce = 3f;
 
-    public AudioClip crashSound;
-    public AudioClip shootSound;
+    // public AudioClip crashSound;
+    // public AudioClip shootSound;
 
     public GameObject bullet;
 
@@ -21,6 +21,8 @@ public class ShipController : MonoBehaviour
 
         gameController =
             gameControllerObject.GetComponent<GameController>();
+
+        transform.position = Vector3.zero;
     }
 
     // called every fixed framerate frame
@@ -46,16 +48,16 @@ public class ShipController : MonoBehaviour
         if (other.gameObject.tag != "Bullet")
         {
             // play crash sound
-            AudioSource.PlayClipAtPoint(
-                crashSound,
-                Camera.main.transform.position
-            );
+            // AudioSource.PlayClipAtPoint(
+            //     crashSound,
+            //     Camera.main.transform.position
+            // );
 
             // ship in center
-            transform.position = new Vector3(0, 0, 0);
+            transform.position = Vector3.zero;
 
             // remove ship velocity
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
             gameController.DecrementLives();
 
@@ -75,9 +77,9 @@ public class ShipController : MonoBehaviour
         );
 
         // play shoot sound
-        AudioSource.PlayClipAtPoint(
-            shootSound,
-            Camera.main.transform.position
-        );
+        // AudioSource.PlayClipAtPoint(
+        //     shootSound,
+        //     Camera.main.transform.position
+        // );
     }
 }

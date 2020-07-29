@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
 {
-    public AudioClip destroySound;
+    // public AudioClip destroySound;
     public GameObject smallAsteroid;
 
     private GameController gameController;
@@ -70,10 +70,10 @@ public class AsteroidController : MonoBehaviour
             }
 
             // play destroy sound
-            AudioSource.PlayClipAtPoint(
-                destroySound,
-                Camera.main.transform.position
-            );
+            // AudioSource.PlayClipAtPoint(
+            //     destroySound,
+            //     Camera.main.transform.position
+            // );
 
             gameController.IncrementScore(); // add to score
 
