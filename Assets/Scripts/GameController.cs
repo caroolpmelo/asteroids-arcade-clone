@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public GameObject asteroid;
 
+    private KeyCode pauseKey = KeyCode.P;
+
     private int score;
     private int hiscore;
     private int asteroidsRemaining;
@@ -18,6 +20,9 @@ public class GameController : MonoBehaviour
     public Text waveText;
     public Text hiscoreText;
 
+    public GameObject btnPauseActive;
+    public GameObject btnPauseDefault;
+
     void Start()
     {
         hiscore = PlayerPrefs.GetInt("hiscore", 0);
@@ -29,6 +34,10 @@ public class GameController : MonoBehaviour
         // when user press escape
         if (Input.GetKey("escape"))
             Application.Quit();
+
+        // pause game
+        if (Input.GetKeyDown(pauseKey))
+            PauseGame();
     }
 
     void BeginGame()
@@ -40,8 +49,8 @@ public class GameController : MonoBehaviour
         // prepare hud
         scoreText.text = "SCORE:" + score;
         hiscoreText.text = "HISCORE:" + hiscore;
-        livesText.text = "SCORE:" + lives;
-        waveText.text = "SCORE:" + wave;
+        livesText.text = "LIVES:" + lives;
+        waveText.text = "WAVE:" + wave;
 
         SpawnAsteroids();
     }
@@ -127,5 +136,21 @@ public class GameController : MonoBehaviour
 
         foreach (GameObject current in smallAsteroids)
             GameObject.Destroy(current);
+    }
+
+    void PauseGame()
+    {
+        if (btnPauseActive.activeSelf)
+        { // is paused
+            btnPauseActive.SetActive(false);
+            btnPauseDefault.SetActive(true);
+            Time.timeScale = 1; // normal time
+        }
+        else if (btnPauseDefault.activeSelf)
+        { // is not paused
+            btnPauseDefault.SetActive(false);
+            btnPauseActive.SetActive(true);
+            Time.timeScale = 0; // freezes time
+        }
     }
 }
